@@ -1,0 +1,83 @@
+Design a Car Rental System
+
+user can:
+1.Log in
+2.Find information about cars
+3.Rent cars
+4.Modify rental contract information
+5.Cancel cars
+5.Pay money to company
+--------------------------------------------------------------------------------
+Class:user
+State:userId,name,phoneNumber,creditCardID
+Behaviour:List<Car> FindCarInfo(Car car){
+    List<Car> cars = RentService.search(car.color, car.size, car.brand);
+    return cars;
+}
+Behaviour:RentCars(userId,plateNumber,rentDays){
+    RentingDetails=RentService.RentCars(userId,plateNumber,rentDays);
+}
+Behaviour:Payment(userId,price,rentDays){
+
+        int bill=Car.price* rentDays;
+        // pay the rental price
+        BankService.checkBalance(creditCardID, bill);
+}
+Behaviour:CancelCars(plateNumber,userId){
+    RentService.CancelCars(plateNumber,userId)
+}
+
+--------------------------------------------------------------------------------
+Class:Car
+State:color,size,brand,produceDate,plateNumber,price
+Behaviour:get(plateNumber){
+        return car;
+    }
+Behavior: CheckAvailable(date, size, color,brand){
+    // check availability of number of cars based on date, size, color, brand;
+    }
+--------------------------------------------------------------------------------
+Class:RentService
+State:
+Behavior: search(color, size, brand){
+    List<Car> cars = Car.getAllCar();
+    List<Car> availableCars
+    int i=0;
+    while(i<cars.size()){
+        //check color
+        if(!cars.get(i).equals(color)) continue;
+        //check size
+        if(cars.get(i) != size) continue;
+        // check brand
+        if(!cars.get(i).equals(brand)) continue;
+        availableCars.add(cars.get(i));
+        i++;
+    }
+}
+
+Behavior: RentCars(userId,plateNumber,rentDays){
+        Car car = Car.get(plateNumber);
+        if(car.CheckAvailable){
+            user.Payment(userId, billService.getPrice(userID),rentDays );
+        }else{
+        // if not Available,cancel cars;
+            RentService.CancelCars(plateNumber,userId);
+            throw new Exception("The car is not available, the payment unsuccessful");
+        }
+
+    }
+Behavior: CancelCars(plateNumber,userId){
+    get user information and fare
+
+}
+----------------------------------------------------
+Class BankService(creditCardID, bill)
+State: userBalance
+Behavior: checkBalance(creditCardID){
+    if(userBalance > bill){
+    // pay success
+    }else{
+    // pay fail
+    }
+}
+
