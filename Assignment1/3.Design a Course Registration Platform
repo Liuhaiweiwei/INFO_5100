@@ -1,0 +1,75 @@
+Design a Course Registration Platform
+
+student can:
+1.log in
+2.search course information
+3.register courses
+4.cancel course registration
+5.get notifications if they register or cancel courses successfully
+--------------------------------------------------
+Class:student
+State:studentId,name,email
+Behaviour:searchCourses(Course course){
+    List<Courses> courses=RegistrationService.search(Course.name,Course.level,Course.date,Course.gradeMode,Course.hours);
+    return courses;
+}
+Behaviour:registerCourse(){
+    registerInfo=RegistrationService.registerCourse(courseId,studentId,RegisterNum);
+}
+Behaviour:cancelCourse(){
+    RegistrationService.cancelCourse(courseId,studentId,RegisterNum);
+}
+--------------------------------------------------
+Class:Course
+State:courseId,name,level,date,gradeMode,hours,RegisterNum,MaxNum
+Behaviour:checkAvailability(RegisterNum,MaxNum){
+    if(RegisterNum<=MaxNum){
+        RegistrationService.sendEmail(studentId,email);
+        return true;
+    }else{
+        throw new Exception("Registration failed");
+        return false;
+    }
+}
+--------------------------------------------------
+Class:RegistrationService
+Behaviour:search(name,level,date,gradeMode,hours){
+    List<Courses> courses=Course.getAllCourse();
+    List<Courses> searchResult=new List<>();
+    //search by name
+    for(int i=0;i<courses.size();i++){
+        if(courses.get(i).equals(name){
+            searchResult.add(courses.get(i));
+        }
+    }
+    //The steps for searching by a single property are the same as above
+
+    //search by level,date,gradeMode,hours together
+    for(int i=0;i<courses.size();i++){
+        if(!courses.get(i).equals(level) continue;
+        if(!courses.get(i).equals(date) continue;
+        if(!courses.get(i).equals(gradeMode) continue;
+        if(!courses.get(i).equals(hours) continue;
+        searchResult.add(courses.get(i));
+    }
+}
+
+Behaviour:registerCourse(courseId,studentId,RegisterNum){
+    if(Course.checkAvailability()==true){
+        RegisterNum=Course.get(RegisterNum)+1;
+        //let student know they register successfully
+        RegistrationService.sendEmail(studentId,email);
+    }else{
+        throw new Exception("Registration failed");
+    }
+}
+
+Behaviour:sendEmail(studentId,email){
+    //send email to student to let them know they have registered successfully
+}
+
+Behaviour:cancelCourse(courseId,studentId,RegisterNum){
+    RegisterNum=Course.get(RegisterNum)-1;
+    //let student know they cancel course successfully
+    RegistrationService.sendEmail(studentId,email);
+}
