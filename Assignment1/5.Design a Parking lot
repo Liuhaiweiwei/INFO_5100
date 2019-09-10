@@ -1,0 +1,46 @@
+Design a Parking lot
+
+driver can:
+1.log in
+2.search information about the parking lot(available spaces,price...)
+1.get a parking card
+2.Park their car in the parking lot
+3.return a parking card
+4.pay for the fee
+---------------------------------------------------------
+Class:driver
+Behaviour:searchInfo(MaxSpaces){
+    //Maximum capacity of the parking lot is MaxSpaces
+    //get the info of spaces
+    availableSpaces=ParkingCard.get(spaces)
+
+    //check the availability of the parking lot
+    boolean isAvailable=true
+    if(availableSpaces>MaxSpaces){
+        isAvailable=false
+    }
+
+    //get the info of price
+    PricePerHour=ParkingCard.get(price)
+}
+Behaviour:getParkingCard(ParkingCard cards){
+    if(isAvailable==true){
+        ParkingCard.spaces=ParkingCard.get(spaces)+1
+        //parking card begins to count time when driver get the card
+        TimingBegins=ParkingCard.get(startTime)
+}
+Behaviour:returnParkingCard(ParkingCard cards){
+    ParkingCard.spaces=ParkingCard.get(spaces)-1
+    //parking card stop counting time when driver return the card
+    EndOfTime=ParkingCard.get(endTime)
+}
+Behaviour:payFee(){
+    payFeeInfo=ParkingCard.paymentService()
+}
+---------------------------------------------------------
+Class:ParkingCard
+State:CardId,startTime,endTime,price,spaces
+Behaviour:paymentService(startTime,endTime,price){
+    TotalPrice=price*(endTime-startTime)
+    return TotalPrice;
+}
