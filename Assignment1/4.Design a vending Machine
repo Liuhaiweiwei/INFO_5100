@@ -1,0 +1,54 @@
+Design a vending Machine(will accept coins of different denominations and vends out candies, soda etc)
+
+Customer can:
+1.drop coins into a vending machine
+2.choose what they want to buy
+3.get their change back
+-------------------------------------------------------------------
+Class:Customer
+Behaviour:dropCoins(Coin coins){
+    CoinsInfo=Coin.checkDenomination(denomination,totalValue)
+}
+Behaviour:chooseCommodity(Commodity commodities){
+    //the number of commodities the customer want to buy
+    CommodityNum nums
+
+    if(Commodity.checkAvailability==true){
+        //get the info of commodities
+        CommodityName=Commodity.get(name)
+        CommodityPrice=Commodity.get(price)
+    }
+}
+Behaviour:getChange(Coin.totalValue,Customer.CommodityNum,Commodity.price){
+    if(CommodityNum*price<totalValue){
+        changeValue=totalValue-CommodityNum*price<totalValue
+    }else if(CommodityNum*price>totalValue){
+        throw new Exception("money not enough");
+    }
+}
+-------------------------------------------------------------------
+Class:Coin
+State:denomination,totalValue
+Behaviour:checkDenomination(denomination,totalValue){
+    List<Coin> coins=Coin.getAllCoins();
+    int i=0;
+    while(i<coins.size()){
+        //vending machine can accept one dollar,fifty cents,quarter dollar,five cents and one cents
+        if(Coin.get(denomination)==1) totalValue+=1;
+        if(Coin.get(denomination)==0.5) totalValue+=0.5;
+        if(Coin.get(denomination)==0.25) totalValue+=0.25;
+        if(Coin.get(denomination)==0.05) totalValue+=0.05;
+        if(Coin.get(denomination)==0.01) totalValue+=0.01;
+        }
+    return totalValue;
+}
+-------------------------------------------------------------------
+Class:Commodity
+State:name,price,amount
+Behaviour:checkAvailability(Customer.CommodityNum,amount){
+    if(Customer.get(CommodityNum)<=amount){
+        return true;
+    }else{
+        return false;
+    }
+}
