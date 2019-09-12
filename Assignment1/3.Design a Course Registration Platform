@@ -10,21 +10,21 @@ student can:
 Class:student
 State:studentId,name,email
 Behaviour:searchCourses(Course course){
-    List<Courses> courses=RegistrationService.search(Course.name,Course.level,Course.date,Course.gradeMode,Course.hours);
+    List<Courses> courses=registrationService.search(course.name,course.level,course.date,course.gradeMode,course.hours);
     return courses;
 }
 Behaviour:registerCourse(){
-    registerInfo=RegistrationService.registerCourse(courseId,studentId,RegisterNum);
+    registerInfo=registrationService.registerCourse(courseId,studentId);
 }
 Behaviour:cancelCourse(){
-    RegistrationService.cancelCourse(courseId,studentId,RegisterNum);
+    registrationService.cancelCourse(courseId,studentId);
 }
 --------------------------------------------------
 Class:Course
 State:courseId,name,level,date,gradeMode,hours,RegisterNum,MaxNum
-Behaviour:checkAvailability(RegisterNum,MaxNum){
+Behaviour:boolean checkAvailability(courseId,RegisterNum,MaxNum){
     if(RegisterNum<=MaxNum){
-        RegistrationService.sendEmail(studentId,email);
+        registrationService.sendEmail(studentId,email);
         return true;
     }else{
         throw new Exception("Registration failed");
@@ -32,8 +32,22 @@ Behaviour:checkAvailability(RegisterNum,MaxNum){
     }
 }
 --------------------------------------------------
-Class:RegistrationService
+Class:registrationService
 Behaviour:search(name,level,date,gradeMode,hours){
+    List<Courses> courses=Course.getAllCourse();
+    List<Courses> searchResult=new List<>();
+    //search by name,level,date,gradeMode,hours together
+    for(int i=0;i<courses.size();i++){
+        if(!courses.get(i).equals(name) continue;
+        if(!courses.get(i).equals(level) continue;
+        if(!courses.get(i).equals(date) continue;
+        if(!courses.get(i).equals(gradeMode) continue;
+        if(!courses.get(i).equals(hours) continue;
+        searchResult.add(courses.get(i));
+    }
+}
+
+Behaviour:search(name){
     List<Courses> courses=Course.getAllCourse();
     List<Courses> searchResult=new List<>();
     //search by name
@@ -43,22 +57,14 @@ Behaviour:search(name,level,date,gradeMode,hours){
         }
     }
     //The steps for searching by a single property are the same as above
-
-    //search by level,date,gradeMode,hours together
-    for(int i=0;i<courses.size();i++){
-        if(!courses.get(i).equals(level) continue;
-        if(!courses.get(i).equals(date) continue;
-        if(!courses.get(i).equals(gradeMode) continue;
-        if(!courses.get(i).equals(hours) continue;
-        searchResult.add(courses.get(i));
-    }
 }
 
-Behaviour:registerCourse(courseId,studentId,RegisterNum){
-    if(Course.checkAvailability()==true){
-        RegisterNum=Course.get(RegisterNum)+1;
+Behaviour:registerCourse(courseId,studentId){
+    Course course=new Course(courseId)
+    if(course.checkAvailability()==true){
+        RegisterNum=course.RegisterNum+1;
         //let student know they register successfully
-        RegistrationService.sendEmail(studentId,email);
+        registrationService.sendEmail(studentId,email);
     }else{
         throw new Exception("Registration failed");
     }
@@ -68,8 +74,9 @@ Behaviour:sendEmail(studentId,email){
     //send email to student to let them know they have registered successfully
 }
 
-Behaviour:cancelCourse(courseId,studentId,RegisterNum){
-    RegisterNum=Course.get(RegisterNum)-1;
+Behaviour:cancelCourse(courseId,studentId){
+    Course course=new Course(courseId)
+    RegisterNum=course.RegisterNum-1;
     //let student know they cancel course successfully
-    RegistrationService.sendEmail(studentId,email);
+    registrationService.sendEmail(studentId,email);
 }
