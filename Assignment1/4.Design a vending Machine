@@ -6,23 +6,23 @@ Customer can:
 3.get their change back
 -------------------------------------------------------------------
 Class:Customer
+State:cost,totalValue
 Behaviour:dropCoins(Coin coins){
-    CoinsInfo=Coin.checkDenomination(denomination,totalValue)
+    this.totalValue=coins.totalValue
+    CoinsInfo=coins.checkDenomination(coins.denomination,coins.totalValue)
 }
-Behaviour:chooseCommodity(Commodity commodities){
-    //the number of commodities the customer want to buy
-    CommodityNum nums
-
-    if(Commodity.checkAvailability==true){
-        //get the info of commodities
-        CommodityName=Commodity.get(name)
-        CommodityPrice=Commodity.get(price)
+Behaviour:chooseCommodity(name,num){
+    Commodity commodities=new Commodity.get(name);
+    if(commodities.checkAvailability(commodities)){
+        this.cost=commodities.price*num;
+    }else{
+        return "not enough num"
     }
 }
-Behaviour:getChange(Coin.totalValue,Customer.CommodityNum,Commodity.price){
-    if(CommodityNum*price<totalValue){
-        changeValue=totalValue-CommodityNum*price<totalValue
-    }else if(CommodityNum*price>totalValue){
+Behaviour:getChange(Customer customer){
+    if(customer.cost<customer.totalValue){
+        changeValue=customer.totalValue-customer.cost
+    }else if(customer.cost>customer.totalValue){
         throw new Exception("money not enough");
     }
 }
@@ -45,8 +45,8 @@ Behaviour:checkDenomination(denomination,totalValue){
 -------------------------------------------------------------------
 Class:Commodity
 State:name,price,amount
-Behaviour:checkAvailability(Customer.CommodityNum,amount){
-    if(Customer.get(CommodityNum)<=amount){
+Behaviour:checkAvailability(Commodity commodities,num){
+    if(num<=commodities.amount){
         return true;
     }else{
         return false;
