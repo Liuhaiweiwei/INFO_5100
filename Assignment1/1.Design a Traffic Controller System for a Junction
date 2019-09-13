@@ -4,8 +4,9 @@ car can:
 1.stop when the light red
 2.go when the light green
 3.wait when the light yellow
+4.take picture if car broke rules
 ------------------------------------------------------------------------------------------------------------------------
-Class:car
+Class:Car
 State:plateNum,DrivingState
 Behaviour:ChangeDrivingState(Light light){
    if(Light.get(color).equals(red){
@@ -20,16 +21,14 @@ Behaviour:ChangeDrivingState(Light light){
 }
 ------------------------------------------------------------------------------------------------------------------------
 Class:Light
-State:color,direction，lengthOfTime
+State:color,lengthOfTime
 Behaviour:ChangeColor(red,green,yellow){
-//Set the signal lights in two directions
-    Light NS_light
-    Light WE_light
-    if(NS_light==red && NS_light.lengthOfTime<60){
-        WE_light=green
-    }else if(NS_light==red && NS_light.lengthOfTime>60 && NS_light.lengthOfTime<65){
-        WE_light=green=yellow
-    }else{
-        WE_light=red
+    //light change color every one minute.
+}
+------------------------------------------------------------------------------------------------------------------------
+Class:Camera
+Behavior:TakePicture(Car car,Light light){
+    if(light.get(color).equals(red) && car.DrivingState==go){
+        takePicture(car.get(plateNum));
     }
 }
