@@ -32,3 +32,4 @@ Behavior:TakePicture(Car car,Light light){
         takePicture(car.get(plateNum));
     }
 }
+
