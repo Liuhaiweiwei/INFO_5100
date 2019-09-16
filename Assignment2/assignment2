@@ -95,7 +95,8 @@ public class Assignment2 {
         Employee employee_8=new Employee("Amit","Agarwal",27,5700,"yuehui@gmail.com","SeniorDeveloper",null);
         Employee employee_9=new Employee("Tianyu","Wang",26,4500,"tianyuwang@gmail.com","Researcher",null);
         Employee employee_10=new Employee("Ram","Menon",29,5700,"rammenon@gmail.com","DataScientist",null);
-        employees={employee_1,employee_2,employee_3,employee_4,employee_5,employee_6,employee_7,employee_8,employee_9,employee_10};
+        Employee[] temp=new Employee[]{employee_1,employee_2,employee_3,employee_4,employee_5,employee_6,employee_7,employee_8,employee_9,employee_10};
+        employees=temp;
     }
 
     public int sumOfSalariesGreaterThanFiveThousands() {
@@ -103,8 +104,8 @@ public class Assignment2 {
         // calculate the sum of salaries of employees having salary greater than 5000
         int sum=0;
         for(int i=0;i<employees.length;i++){
-            if(employees[i].get(3)>5000){
-                sum+=employees[i].get(3);
+            if(employees[i].salary>5000){
+                sum+=employees[i].salary;
             }else{
                 continue;
             }
@@ -116,10 +117,12 @@ public class Assignment2 {
         // @TODO
         // swap salary of even numbered employee with odd numbered employee
         // swap salary of employees[0] with employees[1], employees[2] with employees[3] and so on..
-        for(int i=1;i<employees.length;i++){
-            int temp=employees[0].get(3);
-            employees[0].get(3)=employees[i].get(3);
-            employees[i].get(3)=temp;
+        int i=0;
+        while(i<employees.length-1){
+            int temp=employees[i].salary;
+            employees[i].salary=employees[i+1].salary;
+            employees[i+1].salary=temp;
+            i=i+2;
         }
     }
 
@@ -127,7 +130,7 @@ public class Assignment2 {
         // @TODO
         // sort employees array on the basis of firstName and print
         for(Employee employee : employees) {
-            Arrays.sort(employees,(a,b)->a[0]-b[0]);
+            Arrays.sort(employees,(a,b)->a.firstName-b.firstName);
             System.out.println(employee.firstName);
         }
 
@@ -135,8 +138,8 @@ public class Assignment2 {
         // sort employees array on the basis of age and print
 
         for(Employee employee : employees) {
-            Arrays.sort(employees,(a,b)->a[2]-b[2]);
-            System.out.println(employee.firstName);
+            Arrays.sort(employees,(a,b)->a.age-b.age);
+            System.out.println(employee.age);
         }
     }
 
