@@ -13,7 +13,7 @@ public class Assignment2 {
         double sumRes=0.0;
         for(int i=0;i<employees.length;i++){
             if(employees[i].getSalary()>5000){
-                sumRes+=employees.getSalary();
+                sumRes+=employees[i].getSalary();
             }
         }
         return sumRes;
@@ -65,8 +65,10 @@ public class Assignment2 {
     public void swap(Employee firstEmployee, Employee secondEmployee) {
         // @TODO
         double temp=firstEmployee.getSalary();
-        firstEmployee.getSalary()=secondEmployee.getSalary();
-        secondEmployee.getSalary()=temp;
+        //firstEmployee.salary=secondEmployee.getSalary();
+        firstEmployee.setSalary(secondEmployee.getSalary());
+        //secondEmployee.salary=temp;
+        secondEmployee.setSalary(temp);
     }
 
 
@@ -94,13 +96,15 @@ public class Assignment2 {
     public void reverseFirstName(Employee employee) {
         // @TODO
         int start=0,end=employee.getFirstName().length()-1;
+        char[] arr=employee.getFirstName().toCharArray();
         while(start<end){
-            char c=employee.getFirstName().charAt(start);
-            employee.getFirstName().charAt(start)=employee.getFirstName().charAt(end);
-            employee.getFirstName().charAt(end)=c;
+            char temp=arr[start];
+            arr[start]=arr[end];
+            arr[end]=temp;
             start++;
             end--;
         }
+        employee.setFirstName(arr.toString());
     }
 
 
@@ -115,10 +119,10 @@ public class Assignment2 {
         String str=employee.getFirstName();
         for(int i=0;i<str.length();i++){
             if(Character.isDigit(str.charAt(i))){
-                return true;
+                System.out.println("true");
             }
         }
-        return false;
+        System.out.println("false");
     }
 
 
@@ -131,7 +135,7 @@ public class Assignment2 {
      */
     public void tripleSalary(Employee employee) {
         // @TODO
-        employee.getSalary()=employee.raiseSalary(3);
+        employee.setSalary(employee.raiseSalary(3));
     }
 
 
@@ -149,6 +153,11 @@ public class Assignment2 {
      */
     public Employee[] createEmployees(String[] employeesStr) {
         Employee[] employees = new Employee[employeesStr.length];
+        for(int i=0;i<employees.length;i++){
+            String temp=employeesStr[i];
+            String[] str=temp.split(",");
+            employees[i]=Employee(Integer.parseInt(str[0]),str[1],Integer.parseInt(str[2]),Integer.parseInt(str[3]));
+        }
         // @TODO
 
         return employees;
