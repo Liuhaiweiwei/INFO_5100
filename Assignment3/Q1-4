@@ -1,0 +1,125 @@
+package Assignment3;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+public class Course {
+    private int courseId;
+    private String courseName;
+    private int maxCapacity;
+    private int professorId;
+    private int credits;
+    private int[] studentIds;
+
+    public Course(int courseId){
+        if(courseId>0)
+            this.courseId=courseId;
+    }
+    public Course(int courseId,int professorId){
+        if(courseId>0)
+            this.courseId=courseId;
+        if(professorId>=100000 && professorId<=999999)
+            this.professorId=professorId;
+    }
+    public Course(int courseId,int professorId,int credits){
+        if(courseId>0)
+            this.courseId=courseId;
+        if(professorId>=100000 && professorId<=999999)
+            this.professorId=professorId;
+        if(credits>0 && credits<=9)
+            this.credits=credits;
+    }
+    public void registerStudent(int studentId){
+        List<Integer> temp=new ArrayList<>();
+        temp.add(studentId);
+        for(int i=0;i<temp.size();i++){
+            this.studentIds[i]=temp.get(i);
+        }
+    }
+
+    public int[] removeDuplicates(int[] studentIds) {
+        List<Integer> temp=new ArrayList<>();
+        HashMap<Integer,Integer> hp=new HashMap<>();
+        int len=studentIds.length;
+        for(int i=0;i<len;i++){
+            hp.put(studentIds[i],hp.getOrDefault(studentIds[i],0)+1);
+        }
+        for(int i=0;i<len;i++){
+            if(hp.get(studentIds[i])>1){
+                hp.put(studentIds[i],hp.get(studentIds[i])-1);
+            }else{
+                temp.add(studentIds[i]);
+            }
+        }
+        int[] res=new int[temp.size()];
+        for(int i=0;i<temp.size();i++){
+            res[i]=temp.get(i);
+        }
+        return res;
+    }
+    public int groupsOfStudents(int[] studentIds){
+        int count=0;
+        for(int i=0;i<studentIds.length;i++){
+            for(int j=i+1;j<studentIds.length;j++){
+                if((studentIds[i]+studentIds[j])%2==0){
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
+    public int getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(int courseId) {
+        if(courseId>0)
+            this.courseId = courseId;
+    }
+
+    public String getCourseName() {
+        return courseName;
+    }
+
+    public void setCourseName(String courseName) {
+        if(courseName.length()>=0 && courseName.length()<=60)
+            this.courseName = courseName;
+    }
+
+    public int getMaxCapacity() {
+        return maxCapacity;
+    }
+
+    public void setMaxCapacity(int maxCapacity) {
+        if(maxCapacity>=10 && maxCapacity<=100)
+            this.maxCapacity = maxCapacity;
+    }
+
+    public int getProfessorId() {
+        return professorId;
+    }
+
+    public void setProfessorId(int professorId) {
+        if(professorId>=100000 && professorId<=999999)
+            this.professorId = professorId;
+    }
+
+    public int getCredits() {
+        return credits;
+    }
+
+    public void setCredits(int credits) {
+        if(credits>0 && credits<=9)
+            this.credits = credits;
+    }
+
+    public int[] getStudentIds() {
+        return studentIds;
+    }
+
+    public void setStudentIds(int[] studentIds) {
+        this.studentIds = studentIds;
+    }
+}

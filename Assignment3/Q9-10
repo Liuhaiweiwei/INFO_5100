@@ -1,0 +1,50 @@
+Encapsulation:
+1.Technically in encapsulation, the variables or data of a class is hidden from any other class
+and can be accessed only through any member function of own class in which they are declared.
+2.As in encapsulation, the data in a class is hidden from other classes, so it is also known as data-hiding.
+3.Encapsulation can be achieved by: Declaring all the variables in the class as private
+and writing public methods in the class to set and get the values of variables.
+
+public class Encapsulate{
+    private String geekName;
+    private int geekRoll;
+    private int geekAge;
+
+    public int getAge(){
+      return geekAge;
+    }
+    public String getName(){
+      return geekName;
+    }
+    public int getRoll(){
+       return geekRoll;
+    }
+    public void setAge(int newAge){
+      this.geekAge = newAge;
+    }
+    public void setName(String newName){
+      this.geekName = newName;
+    }
+    public void setRoll(int newRoll){
+      this.geekRoll = newRoll;
+    }
+}
+
+Advantages of Encapsulation:
+1.Data Hiding
+2.Increased Flexibility
+3.Reusability
+4.Testing code is easy
+--------------------------------------------------------------------------------------------------
+Abstraction is a process of hiding the implementation details from the user. Оnly the functionality will be provided to the user.
+In Java, abstraction is achieved using abstract classes and interfaces.
+
+In addition to the fact that abstract classes cannot instantiate objects, other functions of the class still exist,
+and member variables, member methods, and constructors are accessed in the same way as normal classes.
+
+Since abstract classes cannot instantiate objects, abstract classes must be inherited in order to be used.
+Also for this reason, it is usually decided at the design stage whether or not to design an abstract class.
+
+Parent classes contain common methods for collections of subclasses, but because the parent classes themselves are abstract, they cannot be used.
+In Java, an abstract class represents an inheritance relationship.
+A class can only inherit one abstract class, while a class can implement multiple interfaces.
