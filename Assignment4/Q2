@@ -1,0 +1,57 @@
+public abstract class Moody {
+    public String moody;
+    public Moody(String moody){
+        this.moody=moody;
+    }
+    protected abstract String getMood();
+    protected abstract void expressFeelings();
+    public void queryMood(Moody moody){
+        System.out.println("I feel"+moody.getMood()+"today!");
+    }
+}
+
+public class Sad extends Moody {
+    public Sad(String moody){
+        super(moody);
+    }
+    public String getMood(){
+        moody="sad";
+        return moody;
+    }
+    public void expressFeelings(){
+        System.out.println("'wah''boo hoo''weep''sob''weep'");
+    }
+    public String toString(){
+        return "Subject cries a lot";
+    }
+}
+
+public class Happy extends Moody {
+    public Happy(String moody){
+        super(moody);
+    }
+    public String getMood(){
+        moody="happy";
+        return moody;
+    }
+    public void expressFeelings(){
+        System.out.println("hehehe...hahahah...HAHAHAHAHA!!!");
+    }
+    public String toString(){
+        return "Subject laughs a lot";
+    }
+}
+
+public abstract class Psychiatrist extends Moody{
+    public Psychiatrist(String moody){
+        super(moody);
+    }
+    void examine(Moody moody){
+        System.out.println("How are you feeling today?");
+        moody.queryMood(moody);
+        moody.expressFeelings();
+    }
+    void observe(Moody moody){
+      System.out.println("Observation:"+moody.toString());
+    }
+}

@@ -1,0 +1,23 @@
+public class Fifth {
+    public static void main(String[] args){
+        Fifth fif=new Fifth();
+        System.out.println(Arrays.toString(fif.IDarray("DDI")));
+    }
+    public int[] IDarray(String s){
+        int[] res=new int[s.length()+1];
+        int[] temp=new int[s.length()+1];
+        for(int i=0;i<s.length()+1;i++) temp[i]=i;
+        int start=0,end=temp.length-1;
+        for(int i=0;i<s.length();i++){
+            if(s.charAt(i)=='I'){
+                res[i]=temp[start];
+                start++;
+            }else{
+                res[i]=temp[end];
+                end--;
+            }
+        }
+        res[res.length-1]=temp[end];
+        return res;
+    }
+}

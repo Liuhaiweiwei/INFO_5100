@@ -1,0 +1,87 @@
+public class Shape {
+    public static void main(String[] args){
+        Shape s=new Shape();
+        Rectangle r=new Rectangle(2.0,3.0);
+        Circle c=new Circle(4.0);
+        Square sq=new Square(4.0);
+        System.out.println(r.getArea());
+        System.out.println(r.getPerimeter());
+        System.out.println(c.getArea());
+        System.out.println(c.getPerimeter());
+        System.out.println(sq.getArea());
+        System.out.println(sq.getPerimeter());
+        r.draw();
+        c.draw();
+        s.draw();
+        sq.draw();
+    }
+    public String name;
+    public double perimeter;
+    public double area;
+
+    public void draw(){
+        System.out.println("Drawing"+" "+"Shape");
+    }
+    public double getArea(){
+        return area;
+    }
+    public double getPerimeter(){
+        return perimeter;
+    }
+}
+
+public class Rectangle extends Shape {
+    public double width;
+    public double height;
+    public Rectangle(double width,double height){
+        this.width=width;
+        this.height=height;
+    }
+    public void draw(){
+        System.out.println("Drawing"+" "+"Rectangle");
+    }
+    public double getArea(){
+        area=this.width*this.height;
+        return area;
+    }
+    public double getPerimeter(){
+        perimeter=(this.width+this.height)*2;
+        return perimeter;
+    }
+}
+
+public class Square extends Shape {
+    public double side;
+    public Square(double side){
+        this.side=side;
+    }
+    public void draw(){
+        System.out.println("Drawing"+" "+"Square");
+    }
+    public double getArea(){
+        area=this.side*this.side;
+        return area;
+    }
+    public double getPerimeter(){
+        perimeter=this.side*4;
+        return perimeter;
+    }
+}
+
+public class Circle extends Shape {
+    public double radius;
+    public Circle(double radius){
+        this.radius=radius;
+    }
+    public void draw(){
+        System.out.println("Drawing"+" "+"Circle");
+    }
+    public double getArea(){
+        area=3.14f*this.radius*this.radius;
+        return area;
+    }
+    public double getPerimeter(){
+        perimeter=3.14f*this.radius*2;
+        return perimeter;
+    }
+}
