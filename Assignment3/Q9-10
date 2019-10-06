@@ -48,3 +48,4 @@ Also for this reason, it is usually decided at the design stage whether or not t
 Parent classes contain common methods for collections of subclasses, but because the parent classes themselves are abstract, they cannot be used.
 In Java, an abstract class represents an inheritance relationship.
 A class can only inherit one abstract class, while a class can implement multiple interfaces.
+
