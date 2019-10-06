@@ -1,0 +1,91 @@
+public abstract class Dessertltem {
+    public String name;
+    public Dessertltem(String name){
+        this.name=name;
+    }
+    public abstract int getCost();
+}
+
+public class DessertShop {
+    public double taxRate;
+    public String storeName;
+    public double maxSizeItemName;
+    public double widthItemsReceipt;
+    public DessertShop(double taxRate,String storeName,double maxSizeItemName,double widthItemsReceipt){
+        this.taxRate=taxRate;
+        this.storeName=storeName;
+        this.maxSizeItemName=maxSizeItemName;
+        this.widthItemsReceipt=widthItemsReceipt;
+    }
+    public String cents2dollarsAndCents(double cents){
+        return String.valueOf(cents/100);
+    }
+}
+
+public class Candy extends Dessertltem {
+    public double weight;
+    public double pricePerPound;
+    public Candy(String name,double weight,double pricePerPound){
+        super(name);
+        this.name=name;
+        this.weight=weight;
+        this.pricePerPound=pricePerPound;
+    }
+    public int getCost(){
+        double tempCost=weight*pricePerPound;
+        return (int)tempCost*100;
+    }
+}
+
+public abstract class Cookie extends Dessertltem{
+    public int number;
+    public int perDozenPrice;
+    public Cookie(String name,int number,int perDozenPrice){
+        super(name);
+        this.name=name;
+        this.number=number;
+        this.perDozenPrice=perDozenPrice;
+    }
+    public int getCost(){
+        return (int)number*perDozenPrice/12;
+    }
+}
+
+public abstract class IceCream extends Dessertltem{
+    public double price;
+    public IceCream(String name,double price){
+        super(name);
+        this.name=name;
+        this.price=price;
+    }
+    public int getCost(double price){
+        return (int) (this.price=price);
+    }
+}
+
+public abstract class Sundae extends IceCream{
+    public Sundae(String name,double price){
+        super(name,price);
+        this.name=name;
+        this.price=price;
+    }
+    public int getCost(int toppingCost){
+        return (int) price+toppingCost;
+    }
+}
+
+public class Checkout {
+    public void enterItem(Candy candy,Cookie cookie,IceCream iceCream,Sundae sundae){
+
+    }
+    public int numberOfItems(){
+
+    }
+    public int totalCost(){
+
+    }
+    public int totalTax(){
+
+    }
+
+}
