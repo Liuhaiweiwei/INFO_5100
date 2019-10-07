@@ -75,17 +75,17 @@ public abstract class Sundae extends IceCream{
 }
 
 public class Checkout {
-    public void enterItem(Candy candy,Cookie cookie,IceCream iceCream,Sundae sundae){
-
+    public void enterItem(Candy candy){}
+    public void enterItem(Cookie cookie){}
+    public void enterItem(IceCream iceCream){}
+    public void enterItem(Sundae sundae){}
+    public int numberOfItems(Cookie cookie){
+        return cookie.number;
     }
-    public int numberOfItems(){
-
+    public int totalCost(Candy candy,Cookie cookie,IceCream iceCream,Sundae sundae){
+        return candy.getCost()+cookie.getCost()+iceCream.getCost()+sundae.getCost();
     }
-    public int totalCost(){
-
+    public int totalTax(DessertShop dessertShop,Candy candy,Cookie cookie,IceCream iceCream,Sundae sundae){
+        return (int)dessertShop.taxRate * (candy.getCost()+cookie.getCost()+iceCream.getCost()+sundae.getCost());
     }
-    public int totalTax(){
-
-    }
-
 }
