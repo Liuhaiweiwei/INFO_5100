@@ -1,0 +1,9 @@
+Explain the difference between final and finally in Java 8.
+-------------------------------------------------------------
+final:
+1.The final keyword is a non-access modifier used for classes, attributes and methods,
+which makes them non-changeable (impossible to inherit or override).
+2.The final keyword is useful when you want a variable to always store the same value.
+finally:
+The finally keyword is used to execute code (used with exceptions - try..catch statements)
+no matter if there is an exception or not.

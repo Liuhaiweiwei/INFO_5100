@@ -1,0 +1,16 @@
+Create a class called Number.
+Write a method called count() which can calculate quotient of two integers and use try...catch to deal with all possible exception.
+------------------------------------------------------------------------------------------------------------------------------------
+public class Number {
+    public static void main(String[] args){
+        Number number=new Number();
+        try{
+            System.out.println(number.count(3,0));
+        }catch (Exception e){
+            System.out.println("this calculate is not valid");
+        }
+    }
+    public int count(int a, int b){
+        return a/b;
+    }
+}

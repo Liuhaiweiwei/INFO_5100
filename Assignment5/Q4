@@ -1,0 +1,28 @@
+public class MyIndexOutOfBoundException extends Exception{
+    private int lowerBound;
+    private int upperBound;
+    private int index;
+    public MyIndexOutOfBoundException(int lowerBound,int upperBound,int index){
+        this.lowerBound=lowerBound;
+        this.upperBound=upperBound;
+        this.index=index;
+    }
+
+    public int getLowerBound(){
+        return lowerBound;
+    }
+    public int getUpperBound(){
+        return upperBound;
+    }
+    public int getIndex(){
+        return index;
+    }
+}
+
+public class indexOutOfBoundException {
+    public static void main(String[] args) throws MyIndexOutOfBoundException{
+        MyIndexOutOfBoundException index=new MyIndexOutOfBoundException(1,9,0);
+        if(index.getIndex()<index.getLowerBound() || index.getIndex()>index.getUpperBound())
+            System.out.println("Error Message: Index: "+index.getIndex()+","+" but Lower bound: "+index.getLowerBound()+","+" Upper bound: "+index.getUpperBound());
+    }
+}

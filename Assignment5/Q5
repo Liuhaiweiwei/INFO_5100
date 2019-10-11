@@ -1,0 +1,190 @@
+package pet;
+/*File name: Pet.java*/
+
+public class Pet {
+    private String PetName;
+    private String OwnerName;
+    private String color;
+    protected final int sex;
+
+
+    public Pet(String name, String ownerName, String color, int sex){
+        PetName=name;
+        OwnerName=ownerName;
+        this.sex = sex;
+        color=color;
+    }
+    public String getPetName(){
+        return PetName;
+    }
+    public String getOwnerName(){
+        return OwnerName;
+    }
+    public String getColor(){
+        return color;
+    }
+    public void setSex(){};
+
+    public String getSex(int sexid){
+        if(sexid==0)
+            return "MALE";
+        if(sexid==1)
+            return "FEMALE";
+        if(sexid==2)
+            return "SPAYED";
+        if(sexid==3)
+            return "NEUTERED";
+        return "";
+    }
+    public String toString(){
+        Pet pet=new Pet("Spot","Mary","Black and White",0);
+        String s=pet.getPetName()+" owned by "+pet.getOwnerName()+"Color:"+pet.getColor()+"Sex: "+pet.getSex(0);
+        return s;
+    }
+}
+
+
+
+package pet;
+
+public interface Boardable{
+    public void setBoardStart(int month, int day, int year);
+    public void setBoardEnd(int month, int day, int year);
+    public boolean boarding(int month, int day, int year);
+}
+
+
+
+package cat;
+
+import pet.Boardable;
+import pet.Pet;
+
+public class Cat extends Pet implements Boardable {
+    private String hairLength;
+    private int month;
+    private int day;
+    private int year;
+
+    public Cat(String name, String ownerName, String color, int sex, String hairLength){
+        super(name,ownerName,color,sex);
+        this.hairLength=hairLength;
+    }
+    public String getHairLength(){
+        return hairLength;
+    }
+    public String toString(){
+        Cat cat=new Cat("Tom","Bob","black",3,"short");
+        String s="CAT:"+cat.getPetName()+" owned by "+cat.getOwnerName()+"Color:"+cat.getColor()+"Sex: "+cat.getSex(3)+cat.getHairLength();
+        return s;
+    }
+
+    @Override
+    public void setBoardStart(int month, int day, int year) {
+        this.month=month;
+        this.day=day;
+        this.year=year;
+    }
+    public int getBoardStartMonth(){
+        return month;
+    }
+    public int getBoardStartDay(){
+        return day;
+    }
+    public int getBoardStartYear(){
+        return year;
+    }
+
+    @Override
+    public void setBoardEnd(int month, int day, int year) {
+        this.month=month;
+        this.day=day;
+        this.year=year;
+    }
+    public int getBoardEndMonth(){
+        return month;
+    }
+    public int getBoardEndDay(){
+        return day;
+    }
+    public int getBoardEndYear(){
+        return year;
+    }
+    @Override
+    public boolean boarding(int month, int day, int year) {
+        if(this.year>=getBoardStartYear() && this.month>=getBoardStartMonth() && this.day>=getBoardStartDay() && this.year<=getBoardEndYear() && this.month<=getBoardEndMonth() && this.day<=getBoardEndDay()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+}
+
+
+
+package dog;
+
+import pet.Boardable;
+import pet.Pet;
+
+public class Dog extends Pet implements Boardable {
+    private String size;
+    private int month;
+    private int day;
+    private int year;
+
+    public Dog(String name, String ownerName, String color, int sex, String size){
+        super(name,ownerName,color,sex);
+        this.size=size;
+    }
+    public String getSize(){
+        return size;
+    }
+    public String toString(){
+        Dog dog=new Dog("Spot","Susan","white",3,"medium");
+        String s="DOG:"+dog.getPetName()+" owned by "+dog.getOwnerName()+"Color:"+dog.getColor()+"Sex: "+dog.getSex(3)+dog.getSize();
+        return s;
+    }
+
+    @Override
+    public void setBoardStart(int month, int day, int year) {
+        this.month=month;
+        this.day=day;
+        this.year=year;
+    }
+
+    public int getBoardStartMonth(){
+        return month;
+    }
+    public int getBoardStartDay(){
+        return day;
+    }
+    public int getBoardStartYear(){
+        return year;
+    }
+
+    @Override
+    public void setBoardEnd(int month, int day, int year) {
+        this.month=month;
+        this.day=day;
+        this.year=year;
+    }
+    public int getBoardEndMonth(){
+        return month;
+    }
+    public int getBoardEndDay(){
+        return day;
+    }
+    public int getBoardEndYear(){
+        return year;
+    }
+
+    @Override
+    public boolean boarding(int month, int day, int year) {
+        if(this.year>=getBoardStartYear() && this.month>=getBoardStartMonth() && this.day>=getBoardStartDay() && this.year<=getBoardEndYear() && this.month<=getBoardEndMonth() && this.day<=getBoardEndDay()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+}

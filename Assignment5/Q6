@@ -1,0 +1,21 @@
+return 6;
+
+public class Test {
+	public static void main(String[] args) {
+		B b = new B();
+		List<Object> list = Arrays.asList(1,2,3);
+		b.addAll(list);
+		System.out.println(b.getAddCount()+b.getI());
+	}
+}
+First: b.addAll(list); Call class B -> method addAll()
+@Override
+	public boolean addAll(Collection<Object> c) {
+		addCount += c.size();
+		return super.addAll(c);
+	}
+addCount=3; b.getAddCount()=3;
+
+Second:b.getI(); Call class B -> i=3 -> call class A(class B extends class A) -> return 3;
+System.out.println("3");
+
