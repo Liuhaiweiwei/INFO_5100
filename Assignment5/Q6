@@ -1,21 +1,32 @@
 return 6;
 
-public class Test {
-	public static void main(String[] args) {
-		B b = new B();
-		List<Object> list = Arrays.asList(1,2,3);
-		b.addAll(list);
-		System.out.println(b.getAddCount()+b.getI());
-	}
+B b = new B();
+call class A->List<Object> list = new LinkedList<>();->private int i = 0;->call class B->private int addCount = 0;->
+public int i = 3;
+
+List<Object> list = Arrays.asList(1,2,3);
+
+b.addAll(list);
+call class B->
+public boolean addAll(Collection<Object> c) {
+    addCount += c.size();//addCount=3;
+    return super.addAll(c);//call class A->public boolean addAll(Collection<Object> c) {//size=3
+                                           		Iterator<Object> it = c.iterator();
+                                           		while(it.hasNext())
+                                           			this.add(it.next());//call class B->public boolean add(Object e) {
+                                                                                        		addCount++;//addCount=4;
+                                                                                        		return super.add(e);
+                                                                                        		//call class A add();
+                                                                                        		loop three times and then
+                                                                                        		addCount=6; return;
+                                                                                        	}
+                                           		return true;
+                                           	}
 }
-First: b.addAll(list); Call class B -> method addAll()
-@Override
-	public boolean addAll(Collection<Object> c) {
-		addCount += c.size();
-		return super.addAll(c);
-	}
-addCount=3; b.getAddCount()=3;
 
-Second:b.getI(); Call class B -> i=3 -> call class A(class B extends class A) -> return 3;
-System.out.println("3");
+b.getI()->call class A->private int i = 0;->i=0;
+                        public int getI(){
+                            return i;
+                        }
 
+System.out.println(b.getAddCount()+b.getI());//return 6;
