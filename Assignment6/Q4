@@ -1,0 +1,22 @@
+import java.util.HashMap;
+import java.util.HashSet;
+
+public class Solution {
+    public static void main(String[] args){
+        Solution slu=new Solution();
+        int[] arr=new int[]{-3,0,1,-3,1,1,1,-3,10,0};
+        System.out.println(slu.uniqueOccurrences(arr));
+    }
+    public boolean uniqueOccurrences(int[] arr){
+        HashMap<Integer,Integer> hp=new HashMap<>();
+        for(int n:arr){
+            hp.put(n,hp.getOrDefault(n,0)+1);
+        }
+        HashSet<Integer> hs=new HashSet<>();
+        for(int val:hp.keySet()){
+            if(hs.contains(hp.get(val))) return false;
+            hs.add(hp.get(val));
+        }
+        return true;
+    }
+}

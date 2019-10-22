@@ -1,0 +1,17 @@
+public class Solution {
+    public static void main(String[] args){
+        Solution slu=new Solution();
+        System.out.println(slu.isAnagram("rat","car"));
+    }
+    public boolean isAnagram(String S, String T){
+        int[] alphabet=new int[26];
+        for(char s:S.toCharArray()){
+            ++alphabet[s-'a'];
+        }
+        for(char t:T.toCharArray()){
+            if(alphabet[t-'a']<=0) return false;
+            --alphabet[t-'a'];
+        }
+        return true;
+    }
+}

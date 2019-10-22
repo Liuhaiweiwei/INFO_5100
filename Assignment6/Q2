@@ -1,0 +1,7 @@
+Write two differences between ArrayList and LinkedList.
+--------------------------------------------------------
+1. ArrayList implemented with the concept of dynamic array, LinkedList implemented with the concept of doubly linked list.
+2.Insertion and Removal are easy and fast in LinkedList as compared to ArrayList.
+Because there is no risk of resizing array and copying content to new array if array gets full which makes adding into
+ArrayList of O(n) in worst case, while adding is O(1) operation in LinkedList in Java.
+ArrayList also needs to be update its index if you insert something anywhere except.
