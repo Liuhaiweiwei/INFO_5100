@@ -1,0 +1,107 @@
+public class User {
+    public String name;
+    public int age;
+    public String address;
+    public String phoneNumber;
+    public String bankAccountNumber;
+    public User(String name, int age, String address, String phoneNumber, String bankAccountNumber){
+        this.name=name;
+        this.age=age;
+        this.address=address;
+        this.phoneNumber=phoneNumber;
+        this.bankAccountNumber=bankAccountNumber;
+    }
+    public User(String name){
+        this.name=name;
+    }
+}
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+public class Atm {
+    Scanner s=new Scanner(System.in);
+    private int availableAmountInMachine;
+    private int transactionFee;
+    private HashMap<User,String> userData;
+    public Atm(int availableAmountInMachine, int transactionFee){
+        this.availableAmountInMachine=availableAmountInMachine;
+        this.transactionFee=transactionFee;
+    }
+    public void setUserData(String name,int age, String address, String phoneNumber,String bankAccountNumber, String password){
+        User user=new User(name,age,address,phoneNumber,bankAccountNumber);
+        userData.put(user,password);
+    }
+    public User justifyUserExistReturnUser(String name){
+        for(Map.Entry<User,String> entry:userData.entrySet()){
+            if(entry.getKey().name.equals(name)){
+                return entry.getKey();
+            }
+        }
+        return new User(name);
+    }
+    public void CurrentLogin(String name,String password,String forgotPassword){
+        for(Map.Entry<User,String> entry:userData.entrySet()){
+            if(entry.getKey().name.equals(name) && entry.getKey().bankAccountNumber!=null){
+                System.out.println("Please input your bankAccountNumber");
+                if(s.hasNext()){
+                    String str1=s.next();
+                    if(!str1.equals(entry.getKey().bankAccountNumber)){
+                        System.out.println("Your input is wrong");
+                        break;
+                    }
+                }
+                System.out.println("Please input your password");
+                if(s.hasNext()){
+                    String str2=s.next();
+                    if(!str2.equals(password)){
+                        System.out.println("Your input is wrong, Please input your FORGOT PASSWORD");
+                        if(s.hasNext()){
+                            String forgotPass=s.next();
+                            if(forgotPass.equals(forgotPassword)){
+                                System.out.println("Login successful!");
+                            }else{
+                                System.out.println("Resetted password");
+                                System.out.println("input your name");
+                                if(s.hasNext()){
+                                    String justify=s.next();
+                                    if(justify.equals(entry.getKey().name)){
+                                        System.out.println("Login successful!");
+                                    }else{
+                                        System.out.println("Login failed!");
+                                        return;
+                                    }
+                                }
+                            }
+                        }
+                    }else{
+                        System.out.println("Login successful!");
+                        return;
+                    }
+                }
+            }
+        }
+    }
+
+    public void NewUserLogin(String name, int age, String address, String phoneNumber, String bankAccountNumber, String password){
+        User user=new User(name,age,address,phoneNumber,bankAccountNumber);
+        userData.put(user,password);
+        System.out.println("Login successful!");
+        return;
+    }
+    public void deposit(int amount){
+        availableAmountInMachine+=amount;
+    }
+    public void withdraw(int amount,int availableAmountInMachine){
+        if(amount>availableAmountInMachine){
+            System.out.println("Your balance is not enough");
+            return;
+        }else{
+            availableAmountInMachine-=amount;
+        }
+    }
+    public int checkAvailableBalance(){
+        return availableAmountInMachine;
+    }
+}
