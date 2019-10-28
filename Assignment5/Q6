@@ -29,4 +29,4 @@ b.getI()->call class A->private int i = 0;->i=0;
                             return i;
                         }
 
-System.out.println(b.getAddCount()+b.getI());//return 6;
+System.out.println(b.getAddCount()+b.getI());//return 6
