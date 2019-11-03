@@ -1,0 +1,40 @@
+import java.util.Stack;
+
+public class Solution {
+    public static void main(String[] args){
+        Solution slu=new Solution();
+        System.out.println(slu.decodeString("2[abc]3[cd]ef"));
+    }
+    public String decodeString(String s) {
+        String res="";
+        Stack<Integer> number=new Stack<>();
+        Stack<String> str=new Stack<>();
+        int i=0;
+        while(i<s.length()){
+            if(Character.isDigit(s.charAt(i))){
+                int count=0;
+                while(Character.isDigit(s.charAt(i))){
+                    count=count*10+(s.charAt(i)-'0');
+                    i++;
+                }
+                number.push(count);
+            }else if(s.charAt(i)=='['){
+                str.push(res);
+                res="";
+                i++;
+            }else if(Character.isLetter(s.charAt(i))){
+                res+=s.charAt(i);
+                i++;
+            }else if(s.charAt(i)==']'){
+                int len=number.pop();
+                StringBuilder sb=new StringBuilder(str.pop());
+                for(int j=0;j<len;j++){
+                    sb.append(res);
+                }
+                res=sb.toString();
+                i++;
+            }
+        }
+        return res;
+    }
+}

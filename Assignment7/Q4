@@ -1,0 +1,40 @@
+public class getSum extends Thread {
+    public int[] arr;
+    public getSum(int[] arr){
+        this.arr=arr;
+    }
+    public void run(){
+        long sum=0;
+        for(int n:arr){
+            sum+=n;
+        }
+        System.out.println(sum);
+    }
+}
+
+import java.util.Random;
+public class SumValue {
+    public static void generateRandomArray(int[] arr){
+        Random random=new Random();
+        for(int i=0;i<arr.length;i++){
+            arr[i]=random.nextInt();
+        }
+    }
+    public static long sum(int[] arr){
+        Thread thread1=new getSum(arr);
+        Thread thread2=new getSum(arr);
+        Thread thread3=new getSum(arr);
+        Thread thread4=new getSum(arr);
+        thread1.start();
+        thread2.start();
+        thread3.start();
+        thread4.start();
+        return 0;
+    }
+    public static void main(String[] args){
+        int[] arr = new int[4000000];
+        generateRandomArray(arr);
+        long sum = sum(arr);
+        System.out.println("Sum: " + sum);
+    }
+}

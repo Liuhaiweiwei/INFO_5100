@@ -1,0 +1,18 @@
+import java.io.*;
+
+public class ReadTxt {
+    public static void main(String[] args) throws Exception {
+        File file1 = new File("/Users/liuhaiwei/Documents/test.txt");
+        File file2 = new File(("/Users/liuhaiwei/Documents/test2.txt"));
+        System.out.println(getFileLineNumber(file1));
+        System.out.println(getFileLineNumber(file2));
+    }
+
+    private static int getFileLineNumber(File file) throws IOException {
+        LineNumberReader lnr = new LineNumberReader(new FileReader(file));
+        lnr.skip(Long.MAX_VALUE);
+        int lineNo = lnr.getLineNumber()+1;
+        lnr.close();
+        return lineNo;
+    }
+}
