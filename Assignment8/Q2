@@ -1,0 +1,102 @@
+import javax.swing.*;
+import java.awt.*;
+
+public abstract class BaseFrame extends JFrame {
+
+    public BaseFrame() {
+        create();
+        Container con = getContentPane();
+        add(con);
+        addListeners();
+        makeItVisible();
+    }
+
+    public abstract void create();
+
+    public abstract void add(Container con);
+
+    public abstract void addListeners();
+
+    public void makeItVisible() {
+        setSize(600, 600);
+        setVisible(true);
+    }
+
+}
+
+import javax.swing.*;
+import java.awt.*;
+
+public class StudentInfo extends BaseFrame {
+    private JLabel nameLabel,genderLabel,idLabel;
+    private JTextField nameText,genderText,idText;
+    private JButton add,viewAll;
+
+    private JTable studentsTable;
+    @Override
+    public void create() {
+        nameLabel = new JLabel("Enter Student Name : ");
+        genderLabel = new JLabel("Enter Student Gender : ");
+        idLabel = new JLabel("Enter Student ID : ");
+
+        nameText=new JTextField(10);
+        genderText=new JTextField(10);
+        idText=new JTextField(10);
+
+        add = new JButton("Add");
+        viewAll=new JButton("View All");
+    }
+
+    @Override
+    public void add(Container con) {
+        GridLayout gl = new GridLayout(5, 1);
+        con.setLayout(gl);
+        addAddButton(con);
+        addFirstComponent(con);
+        addSecondComponent(con);
+        addThirdComponent(con);
+        addviewAllButton(con);
+    }
+
+    @Override
+    public void addListeners() {
+
+    }
+
+    private void addAddButton(Container con) {
+        con.add(add);
+
+    }
+
+    private void addviewAllButton(Container con) {
+        con.add(viewAll);
+
+    }
+    private void addThirdComponent(Container con) {
+        addComponents(con, idLabel, idText);
+
+    }
+
+    private void addSecondComponent(Container con) {
+        addComponents(con, genderLabel, genderText);
+
+    }
+
+    private void addFirstComponent(Container con) {
+        JPanel panel = new JPanel();
+        panel.add(nameLabel);
+        panel.add(nameText);
+        con.add(panel);
+    }
+
+    private void addComponents(Container con, Component a, Component b) {
+        JPanel panel = new JPanel();
+        panel.add(a);
+        panel.add(b);
+        con.add(panel);
+
+    }
+    public static void main(String[] args) {
+        new StudentInfo();
+    }
+}
